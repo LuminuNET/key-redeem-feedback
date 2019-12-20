@@ -1,0 +1,19 @@
+{
+	"name": "@luminu/beta-key-redeem",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "concurrently -n frontend \"cd ./packages/frontend && npm run serve\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@git.luminu.net:Keimeno/beta-key-redeem.git"
+	},
+	"dependencies": {
+		"concurrently": "^5.0.0"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
