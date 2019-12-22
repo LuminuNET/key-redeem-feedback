@@ -37,17 +37,17 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import "~@luminu/ui-kit/scss/_variables.scss";
+@import "~@luminu/core/scss/_variables.scss";
 
 .user-auth {
 	.logo {
-		background-color: $lmColor3;
+		background-color: $lmColor1;
 		border-radius: 2px;
 		padding: 5px;
 		transition: background-color 0.2s;
 
 		&:hover {
-			background-color: $lmColor1;
+			background-color: $lmColor3;
 		}
 	}
 }
