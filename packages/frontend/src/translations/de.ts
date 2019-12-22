@@ -22,7 +22,8 @@ const de = {
 		codeNotSpecified: 'Kein Key wurde angegeben.',
 		codeLengthNot8: 'Die Länge des Keys ist nicht 8.',
 		usernameNotSpecifiedInQuery: 'Es wurde kein Nutzername angegeben.',
-		serviceUnavailable: 'Der Server ist derzeitig unerreichbar.'
+		serviceUnavailable: 'Der Server ist derzeitig unerreichbar.',
+		codeRedeemedSuccessfully: 'Der Key wurde erfolgreich eingelöst.'
 	},
 	footer
 };

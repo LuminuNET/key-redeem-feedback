@@ -23,7 +23,8 @@ const en = {
 		codeLengthNot8: 'The length of the the code specified is not 8.',
 		usernameNotSpecifiedInQuery:
 			'The username was not specified in the query.',
-		serviceUnavailable: 'Service currently unavailable.'
+		serviceUnavailable: 'Service currently unavailable.',
+		codeRedeemedSuccessfully: 'The code was redeemed successfully.'
 	},
 	footer
 };
