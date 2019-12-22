@@ -21,7 +21,10 @@ export default [
 			checkExistsRedeemedCode,
 			checkUserAlreadyRedeemed,
 			async ({ query }: Request, res: Response) => {
-				const result = await redeemCode(query.username, query.code);
+				const result = await redeemCode(
+					res.locals.mcApi.uuid,
+					query.code
+				);
 				res.status(200).send(result);
 			}
 		]
