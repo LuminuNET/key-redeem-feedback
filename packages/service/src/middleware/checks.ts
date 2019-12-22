@@ -62,6 +62,7 @@ export const verifyUsername = (
 	minecraftApi
 		.get(query.username)
 		.then((response: AxiosResponse) => {
+			res.locals.mcApi = response.data;
 			next();
 		})
 		.catch((error: AxiosError) => {
@@ -105,9 +106,7 @@ export const checkUserAlreadyRedeemed = async (
 	res: Response,
 	next: NextFunction
 ) => {
-	const uuid = ((await minecraftApi.get(query.username)) as any)['data'][
-		'uuid'
-	];
+	const uuid = res.locals.mcApi.uuid;
 
 	const checkUserAlreadyRedeemedQuery =
 		'SELECT * FROM `beta_keys` WHERE `used_by`=' + con.escape(uuid);
