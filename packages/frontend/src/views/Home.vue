@@ -5,9 +5,7 @@
 			<lm-card class="lm-beta">
 				<h2 class="title">Luminu Beta</h2>
 				<p class="description">{{ $t('home.youCanRedeemYourBetaKeyHere') }}</p>
-				<div class="seperator">
-					<hr />
-				</div>
+				<lm-seperator :mtop="9" />
 				<h3 class="subtitle">{{ $t('home.enterYour8DigitCode') }}</h3>
 				<div class="code-input wrapper">
 					<input
@@ -21,9 +19,7 @@
 						maxlength="1"
 					/>
 				</div>
-				<div class="seperator">
-					<hr />
-				</div>
+				<lm-seperator :mtop="13" />
 				<h3 class="subtitle">{{ $t('home.yourMinecraftUsername') }}</h3>
 				<input v-model="username" @keydown.enter="redeem" type="text" class="user-input" />
 				<p class="description">{{ $t('home.makeSureYoureEnteringYourNameCorrectly') }}</p>
@@ -39,14 +35,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { LmCard, LmNotification } from "@luminu/components";
+import { LmCard, LmNotification, LmSeperator } from "@luminu/components";
 import { AxiosResponse, AxiosError } from "axios";
 
 export default Vue.extend({
 	name: "home",
 	components: {
 		LmCard,
-		LmNotification
+		LmNotification,
+		LmSeperator
 	},
 	data: () => ({
 		notification: {
