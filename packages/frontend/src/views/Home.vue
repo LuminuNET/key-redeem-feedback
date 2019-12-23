@@ -24,9 +24,7 @@
 				<input v-model="username" @keydown.enter="redeem" type="text" class="user-input" />
 				<p class="description">{{ $t('home.makeSureYoureEnteringYourNameCorrectly') }}</p>
 				<div class="btn-group">
-					<div @click.stop="redeem" class="btn btn--success">
-						<p class="btn__content">{{ $t('home.redeem') }}</p>
-					</div>
+					<lm-button @click.native="redeem" size="big" type="success" :text="$t('home.redeem')" />
 				</div>
 			</lm-card>
 		</div>
@@ -35,7 +33,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { LmCard, LmNotification, LmSeperator } from "@luminu/components";
+import {
+	LmCard,
+	LmNotification,
+	LmSeperator,
+	LmButton
+} from "@luminu/components";
 import { AxiosResponse, AxiosError } from "axios";
 
 export default Vue.extend({
@@ -43,7 +46,8 @@ export default Vue.extend({
 	components: {
 		LmCard,
 		LmNotification,
-		LmSeperator
+		LmSeperator,
+		LmButton
 	},
 	data: () => ({
 		notification: {
