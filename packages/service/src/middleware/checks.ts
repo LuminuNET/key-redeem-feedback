@@ -54,24 +54,28 @@ export const checkCode = (
 	}
 };
 
-export const verifyUsername = (
+export const verifyUsername = async (
 	{ query }: Request,
 	res: Response,
 	next: NextFunction
 ) => {
-	minecraftApi
-		.get(query.username)
-		.then((response: AxiosResponse) => {
-			res.locals.mcApi = response.data;
-			next();
-		})
-		.catch((error: AxiosError) => {
-			if (error.code === '404') {
-				throw new HTTP404Error('usernameNotFound');
-			} else {
-				throw new HTTP500Error();
-			}
-		});
+	const { error }: { error: AxiosError } = await new Promise(resolve => {
+		minecraftApi
+			.get(query.username)
+			.then((response: AxiosResponse) => {
+				res.locals.mcApi = response.data;
+				next();
+			})
+			.catch((error: AxiosError) => {
+				resolve({ error });
+			});
+	});
+
+	if (error.response?.status === 404) {
+		throw new HTTP404Error('usernameNotFound');
+	} else {
+		throw new HTTP500Error('serviceUnavailable');
+	}
 };
 
 export const checkExistsRedeemedCode = async (
