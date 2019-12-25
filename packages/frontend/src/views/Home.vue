@@ -1,6 +1,10 @@
 <template>
 	<div class="home view">
-		<lm-notification :message="$t('response.' + notification.message)" :active="notification.active" />
+		<lm-notification
+			:fontSize="window().screenX <= 560 ? 18 : 22"
+			:message="$t('response.' + notification.message)"
+			:active="notification.active"
+		/>
 		<div class="container">
 			<lm-card class="lm-beta">
 				<h2 class="title">Luminu Beta</h2>
@@ -13,11 +17,12 @@
 						:key="index"
 						@keydown.stop="entered($event, index)"
 						:ref="`code-${index}`"
-						class="code-input"
+						class="code-input desktop"
 						type="text"
 						name="code"
 						maxlength="1"
 					/>
+					<input type="text" name="code" ref="code-input-mobile" class="user-input mobile" maxlength="8" />
 				</div>
 				<lm-seperator :mtop="13" />
 				<h3 class="subtitle">{{ $t('home.yourMinecraftUsername') }}</h3>
@@ -55,16 +60,27 @@ export default Vue.extend({
 			active: false
 		},
 		username: "",
-		code: ""
+		code: "",
+		mobileBreakpoint: 560
 	}),
 	methods: {
-		redeem() {
-			// Build entered code
-			this.code = "";
-			for (let i = 1; i < 9; i++) {
+		window(): Window {
+			return window;
+		},
+		updateCode() {
+			if (window.screenX <= 560) {
 				// @ts-ignore
-				this.code += this.$refs[`code-${i}`][0].value;
+				this.code = this.$refs["code-input-mobile"].value;
+			} else {
+				this.code = "";
+				for (let i = 1; i < 9; i++) {
+					// @ts-ignore
+					this.code += this.$refs[`code-${i}`][0].value;
+				}
 			}
+		},
+		redeem() {
+			this.updateCode();
 
 			// Check if input lengths are valid
 			if (
@@ -158,6 +174,10 @@ export default Vue.extend({
 			}
 		}
 
+		.code-input > .mobile {
+			display: none;
+		}
+
 		.code-input > .code-input,
 		.user-input {
 			width: 10%;
@@ -175,6 +195,17 @@ export default Vue.extend({
 			}
 		}
 
+		@media screen and (max-width: 560px) {
+			.code-input {
+				> .code-input {
+					display: none;
+				}
+				> .mobile {
+					display: unset;
+				}
+			}
+		}
+
 		.user-input {
 			width: 100%;
 			height: 28px;
@@ -184,6 +215,7 @@ export default Vue.extend({
 		}
 
 		.btn-group {
+			margin-top: 10px;
 			display: flex;
 			flex-direction: row-reverse;
 
@@ -202,6 +234,12 @@ export default Vue.extend({
 					background-color: $lmSuccessDarken;
 				}
 			}
+		}
+	}
+
+	@media screen and (max-width: 560px) {
+		.lm-beta {
+			width: 100%;
 		}
 	}
 }
