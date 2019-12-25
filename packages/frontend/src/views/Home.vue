@@ -1,7 +1,7 @@
 <template>
 	<div class="home view">
 		<lm-notification
-			:fontSize="window().screenX <= 560 ? 18 : 22"
+			:fontSize="window().innerWidth <= 560 ? 18 : 24"
 			:message="$t('response.' + notification.message)"
 			:active="notification.active"
 		/>
@@ -68,7 +68,7 @@ export default Vue.extend({
 			return window;
 		},
 		updateCode() {
-			if (window.screenX <= 560) {
+			if (window.innerWidth <= 560) {
 				// @ts-ignore
 				this.code = this.$refs["code-input-mobile"].value;
 			} else {
