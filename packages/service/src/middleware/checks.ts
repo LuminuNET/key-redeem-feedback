@@ -10,6 +10,7 @@ import minecraftApi from './minecraftApi';
 import { AxiosResponse, AxiosError } from 'axios';
 import con from './mysql';
 import { MysqlError } from 'mysql';
+import { incrUser } from './redis';
 
 dotenv.config();
 
@@ -126,6 +127,20 @@ export const checkUserAlreadyRedeemed = async (
 
 	if (result.length !== 0) {
 		throw new HTTP400Error('userAlreadyRedeemedBetaCode');
+	}
+
+	next();
+};
+
+export const checkTooManyRequests = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const amount = await incrUser('redeem', req.ip);
+
+	if (parseInt(amount + '') > 9) {
+		throw new HTTP400Error('tooManyRequestsAtOnce');
 	}
 
 	next();
