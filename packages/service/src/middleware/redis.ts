@@ -1,6 +1,16 @@
 import Redis from 'ioredis';
+import dotenv from 'dotenv';
 
-const redis = new Redis();
+dotenv.config();
+
+const redis = new Redis(
+	parseInt(process.env.REDIS_PORT as string),
+	process.env.REDIS_IP,
+	{
+		connectTimeout: parseInt(process.env.REDIS_CONNECTION_TIMEOUT as string)
+	}
+);
+
 const baseKey = 'lm:web:betaKey:';
 
 /**
