@@ -25,7 +25,7 @@ applyMiddleware(errorHandlers, router);
 
 const { PORT = 3000 } = process.env;
 
-switch (process.env.APP_MODE as string) {
+switch (process.env.NODE_ENV as string) {
 	case 'DEV' || 'DEVELOPMENT':
 		http.createServer(router).listen(PORT, () => {
 			console.info(`Running server on http://localhost:${PORT}`);
