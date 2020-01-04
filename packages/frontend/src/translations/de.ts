@@ -23,7 +23,9 @@ const de = {
 		codeLengthNot8: 'Die Länge des Keys ist nicht 8.',
 		usernameNotSpecifiedInQuery: 'Es wurde kein Nutzername angegeben.',
 		serviceUnavailable: 'Der Server ist derzeitig unerreichbar.',
-		codeRedeemedSuccessfully: 'Der Key wurde erfolgreich eingelöst.'
+		codeRedeemedSuccessfully: 'Der Key wurde erfolgreich eingelöst.',
+		tooManyRequestsAtOnce:
+			'Du hast zu viele Anfragen auf einmal gesendet, bitte warte einen Moment.'
 	},
 	footer
 };

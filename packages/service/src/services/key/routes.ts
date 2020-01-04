@@ -5,10 +5,12 @@ import {
 	checkCode,
 	verifyUsername,
 	checkExistsRedeemedCode,
-	checkUserAlreadyRedeemed
+	checkUserAlreadyRedeemed,
+	checkTooManyRequests
 } from '../../middleware/checks';
 import generateKeys from './generateKeys';
 import redeemCode from './redeemCode';
+import { delUser } from '../../middleware/redis';
 
 export default [
 	{
@@ -18,9 +20,11 @@ export default [
 			checkUsername,
 			checkCode,
 			verifyUsername,
+			checkTooManyRequests,
 			checkExistsRedeemedCode,
 			checkUserAlreadyRedeemed,
-			async ({ query }: Request, res: Response) => {
+			async ({ query, ip }: Request, res: Response) => {
+				await delUser('redeem', ip);
 				const result = await redeemCode(
 					res.locals.mcApi.uuid,
 					query.code

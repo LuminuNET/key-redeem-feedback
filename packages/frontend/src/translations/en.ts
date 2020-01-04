@@ -24,7 +24,9 @@ const en = {
 		usernameNotSpecifiedInQuery:
 			'The username was not specified in the query.',
 		serviceUnavailable: 'Service currently unavailable.',
-		codeRedeemedSuccessfully: 'The code was redeemed successfully.'
+		codeRedeemedSuccessfully: 'The code was redeemed successfully.',
+		tooManyRequestsAtOnce:
+			'You have sent too many requests, please wait for 5 minutes.'
 	},
 	footer
 };
