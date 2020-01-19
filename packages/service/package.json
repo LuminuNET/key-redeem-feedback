@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
 		"start": "npx pm2 start pm2.yaml",
-		"postinstall": "npx tsc"
+		"postinstall": "npx tsc",
+		"build": "tsc --onSuccess \"node ./dist/server.js\""
 	},
 	"dependencies": {
 		"@types/compression": "^1.0.1",
