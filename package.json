@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\"",
 		"build:pre": "npm install && cd ./packages/frontend && npm install && cd ../service && npm install",
-		"build": "cd ./packages/frontend && npm run build && ../service && npm run build"
+		"build": "cd ./packages/frontend && npm run build && ../service && npm run build",
+		"deploy": "cd ./packages/frontend && mv . /var/www/beta.luminu.net"
 	},
 	"repository": {
 		"type": "git",
