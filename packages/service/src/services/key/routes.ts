@@ -12,9 +12,11 @@ import generateKeys from './generateKeys';
 import redeemCode from './redeemCode';
 import { delUser } from '../../middleware/redis';
 
+const basePath = `${process.env.BASE_PATH}/v1`;
+
 export default [
 	{
-		path: '/api/v1/redeem',
+		path: `${basePath}/redeem`,
 		method: 'put',
 		handler: [
 			checkUsername,
@@ -34,7 +36,7 @@ export default [
 		]
 	},
 	{
-		path: '/api/v1/generate/:amount',
+		path: `${basePath}/generate/:amount`,
 		method: 'post',
 		handler: [
 			checkApiKey,

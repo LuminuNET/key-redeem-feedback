@@ -11,8 +11,5 @@ export default async (uuid: string, code: string): Promise<any> => {
 
 	con.query(query);
 
-	console.log(uuid);
-	console.log(code);
-
 	return { success: true, message: 'codeRedeemedSuccessfully' };
 };
