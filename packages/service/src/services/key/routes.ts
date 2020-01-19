@@ -5,22 +5,28 @@ import {
 	checkCode,
 	verifyUsername,
 	checkExistsRedeemedCode,
-	checkUserAlreadyRedeemed
+	checkUserAlreadyRedeemed,
+	checkTooManyRequests
 } from '../../middleware/checks';
 import generateKeys from './generateKeys';
 import redeemCode from './redeemCode';
+import { delUser } from '../../middleware/redis';
+
+const basePath = `${process.env.BASE_PATH}/v1`;
 
 export default [
 	{
-		path: '/api/v1/redeem',
+		path: `${basePath}/redeem`,
 		method: 'put',
 		handler: [
 			checkUsername,
 			checkCode,
 			verifyUsername,
+			checkTooManyRequests,
 			checkExistsRedeemedCode,
 			checkUserAlreadyRedeemed,
-			async ({ query }: Request, res: Response) => {
+			async ({ query, ip }: Request, res: Response) => {
+				await delUser('redeem', ip);
 				const result = await redeemCode(
 					res.locals.mcApi.uuid,
 					query.code
@@ -30,7 +36,7 @@ export default [
 		]
 	},
 	{
-		path: '/api/v1/generate/:amount',
+		path: `${basePath}/generate/:amount`,
 		method: 'post',
 		handler: [
 			checkApiKey,

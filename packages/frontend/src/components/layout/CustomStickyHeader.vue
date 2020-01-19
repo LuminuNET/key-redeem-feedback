@@ -1,11 +1,11 @@
 <template>
-	<lm-sticky-header :links="links">
-		<li class="user-auth">
-			<a target="_blank" href="https://luminu.net">
-				<img class="logo" src="@/assets/luminu.png" width="42" height="42" />
-			</a>
-		</li>
-	</lm-sticky-header>
+	<lm-sticky-header
+		type="noLogin"
+		:dropdownItems="[]"
+		:notLoggedInAction="''"
+		:image="require('../../assets/luminu.png')"
+		:links="links"
+	></lm-sticky-header>
 </template>
 
 <script lang="ts">

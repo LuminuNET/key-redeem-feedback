@@ -4,7 +4,10 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\""
+		"start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\"",
+		"build:pre": "npm install && cd ./packages/frontend && npm install && cd ../service && npm install",
+		"build": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm run build\"",
+		"deploy": "cd ./packages/frontend && mv dist /var/www/beta.luminu.net"
 	},
 	"repository": {
 		"type": "git",
