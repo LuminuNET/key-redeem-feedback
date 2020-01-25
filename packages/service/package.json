@@ -1,7 +1,7 @@
 {
   "name": "service",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "start": "npx pm2 start pm2.yaml",

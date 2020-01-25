@@ -1,11 +1,11 @@
 {
-  "name": "@luminu/cloud-management",
+  "name": "@luminu/fullstack-template",
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "index.js",
   "scripts": {
-    "start": "concurrently -n frontend \"cd ./packages/frontend && npm run serve\""
+    "start": "concurrently -n frontend \"cd ./packages/frontend && npm run serve\"",
+    "postinstall": "cd ./packages/frontend && npm run install && cd ../service && npm run install"
   },
   "keywords": [],
   "author": "",
