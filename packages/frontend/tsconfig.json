@@ -5,11 +5,16 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "types": ["webpack-env", "jest", "node"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost", "ES2015"],
     "paths": {
       "@/*": ["src/*"]
-    },
-    "types": ["webpack-env", "jest"],
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    }
   },
   "exclude": ["node_modules"],
   "include": [
