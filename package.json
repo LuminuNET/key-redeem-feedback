@@ -5,12 +5,15 @@
   "private": true,
   "scripts": {
     "start": "concurrently -n frontend \"cd ./packages/frontend && npm run serve\"",
-    "postinstall": "cd ./packages/frontend && npm run install && cd ../service && npm run install"
+    "postinstall": "cd ./packages/frontend && npm install && cd ../service && npm install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.0.2"
+  },
+  "dependencies": {
+    "vue-i18n": "^8.15.3"
   }
 }

@@ -6,6 +6,9 @@ import middleware from './middleware';
 import errorHandlers from './middleware/errorHandlers';
 import routes from './services';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 process.on('uncaughtException', e => {
   console.log(e);
@@ -24,13 +27,15 @@ applyMiddleware(errorHandlers, router);
 
 const { PORT = 3000 } = process.env;
 
-switch (process.env.NODE_ENV as string) {
-  case 'DEV' || 'DEVELOPMENT':
+switch (process.env.NODE_ENV) {
+  case 'dev':
+  case 'development':
     http.createServer(router).listen(PORT, () => {
       console.info(`Running server on http://localhost:${PORT}`);
     });
     break;
-  case 'PROD' || 'PRODUCTION':
+  case 'prod':
+  case 'production':
     https
       .createServer(
         {
@@ -46,6 +51,6 @@ switch (process.env.NODE_ENV as string) {
     break;
   default:
     console.warn(
-      'Server not running! No APP_MODE specified, use mode DEV or PROD'
+      'Server not running! No NODE_ENV specified, use mode DEV or PROD'
     );
 }

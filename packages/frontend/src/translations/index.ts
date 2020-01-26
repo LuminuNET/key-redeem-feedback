@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 
-import { Locale } from '@luminu/core/frontend';
+import { Locale } from '@luminu/core';
 const { getLocale } = Locale;
 
 import { en } from './en';

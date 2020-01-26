@@ -1,14 +1,16 @@
 import { Request, Response } from 'express';
+import dotenv from 'dotenv';
+import { basePath } from '../../middleware/common';
 
-const basePath = `${process.env.BASE_PATH}/v1`;
+dotenv.config();
 
 export = [
   {
     path: `${basePath}/sample`,
-    method: 'put',
+    method: 'get',
     handler: [
-      async ({ query, ip }: Request, res: Response) => {
-        const result = {};
+      async ({}: Request, res: Response) => {
+        const result = { is: 'working' };
         res.status(200).send(result);
       },
     ],

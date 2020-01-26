@@ -1,6 +1,9 @@
 import { Response, NextFunction } from 'express';
 import { HTTPClientError, HTTP404Error } from './httpErrors';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 export const notFoundError = () => {
   throw new HTTP404Error('Method not found.');
 };
