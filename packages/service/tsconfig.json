@@ -6,7 +6,9 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "suppressImplicitAnyIndexErrors": false,
-    "types": ["jest"]
+    "types": ["jest"],
+    "skipLibCheck": true
   },
+  "exclude": ["node_modules/**"],
   "include": ["src/**/*.ts", "tests/**/*.ts"]
 }
