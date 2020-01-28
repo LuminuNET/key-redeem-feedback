@@ -11,12 +11,13 @@ import {
 import generateKeys from './generateKeys';
 import redeemCode from './redeemCode';
 import { Redis } from '@luminu/core';
+import { basePath } from '../../middleware/common';
 
 const { delUser } = Redis;
 
 export default [
   {
-    path: '/api/v1/redeem',
+    path: `${basePath}/redeem`,
     method: 'put',
     handler: [
       checkUsername,
@@ -33,7 +34,7 @@ export default [
     ],
   },
   {
-    path: '/api/v1/generate/:amount',
+    path: `${basePath}/generate/:amount`,
     method: 'post',
     handler: [
       checkApiKey,
