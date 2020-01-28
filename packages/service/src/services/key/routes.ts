@@ -15,6 +15,8 @@ import { basePath } from '../../middleware/common';
 
 const { delUser } = Redis;
 
+const basePath = `${process.env.BASE_PATH}/v1`;
+
 export default [
   {
     path: `${basePath}/redeem`,
