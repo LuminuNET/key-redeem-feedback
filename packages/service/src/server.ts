@@ -51,6 +51,6 @@ switch (process.env.NODE_ENV) {
     break;
   default:
     console.warn(
-      'Server not running! No NODE_ENV specified, use mode DEV or PROD'
+      'Server not running! No NODE_ENV specified, use mode development or production'
     );
 }
