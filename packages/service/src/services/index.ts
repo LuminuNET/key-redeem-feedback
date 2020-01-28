@@ -1,3 +1,4 @@
 import keyRoutes from './key/routes';
+import { Route } from '../utils';
 
-export default [...keyRoutes];
+export default [...keyRoutes] as Route[];

@@ -1,22 +1,22 @@
 {
-	"name": "@luminu/beta-key-redeem",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\"",
-		"build:pre": "npm install && cd ./packages/frontend && npm install && cd ../service && npm install",
-		"build": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm run build\"",
-		"deploy": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm start\""
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@git.luminu.net:Keimeno/beta-key-redeem.git"
-	},
-	"dependencies": {
-		"concurrently": "^5.0.0"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC"
+  "name": "@luminu/beta-key-redeem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\"",
+    "build:pre": "npm install && cd ./packages/frontend && npm install && cd ../service && npm install",
+    "build": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm run build\"",
+    "deploy": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.luminu.net:Keimeno/beta-key-redeem.git"
+  },
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
