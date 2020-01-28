@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 
 const api = axios.create({
-	baseURL: process.env.VUE_APP_ROOT_API
+  baseURL: 'http://localhost:3000/api/v1',
 });
 
 Vue.prototype.$http = api;

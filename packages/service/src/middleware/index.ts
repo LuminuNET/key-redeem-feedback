@@ -1,7 +1,13 @@
 import {
-	handleCors,
-	handleBodyRequestParsing,
-	handleCompression
+  handleCors,
+  handleBodyRequestParsing,
+  handleCompression,
+  registerRedisClient,
 } from './common';
 
-export default [handleCors, handleBodyRequestParsing, handleCompression];
+export = [
+  handleCors,
+  handleBodyRequestParsing,
+  handleCompression,
+  registerRedisClient,
+];

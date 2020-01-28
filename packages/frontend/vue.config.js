@@ -1,6 +1,8 @@
 module.exports = {
-	// options...
-	devServer: {
-		disableHostCheck: true
-	}
+  configureWebpack: {
+    node: {
+      dns: 'mock',
+      net: 'mock',
+    },
+  },
 };
