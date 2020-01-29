@@ -4,6 +4,7 @@ import { router } from './router';
 import { store } from './store';
 import { i18n } from './translations';
 import './registerServiceWorker';
+import './plugins';
 
 Vue.config.productionTip = false;
 

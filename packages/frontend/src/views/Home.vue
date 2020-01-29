@@ -32,7 +32,13 @@
         </div>
         <lm-seperator :mtop="13" />
         <h3 class="subtitle">{{ $t('home.yourMinecraftUsername') }}</h3>
-        <input v-model="username" @keydown.enter="redeem" type="text" class="user-input" />
+        <input
+          v-model="username"
+          ref="username"
+          @keydown.enter="redeem"
+          type="text"
+          class="user-input"
+        />
         <p class="description">{{ $t('home.makeSureYoureEnteringYourNameCorrectly') }}</p>
         <div class="btn-group">
           <lm-button @click.native="redeem" size="big" type="success" :text="$t('home.redeem')" />
@@ -51,6 +57,7 @@ import {
   LmButton,
 } from '@luminu/components';
 import { AxiosResponse, AxiosError } from 'axios';
+import { api } from '../plugins/axios';
 
 export default Vue.extend({
   name: 'home',
@@ -75,13 +82,11 @@ export default Vue.extend({
     },
     updateCode() {
       if (window.innerWidth <= 560) {
-        // @ts-ignore
-        this.code = this.$refs['code-input-mobile'].value;
+        this.code = (this.$refs['code-input-mobile'] as HTMLInputElement).value;
       } else {
         this.code = '';
         for (let i = 1; i < 9; i++) {
-          // @ts-ignore
-          this.code += this.$refs[`code-${i}`][0].value;
+          this.code += (this.$refs[`code-${i}`] as HTMLInputElement[])[0].value;
         }
       }
     },
@@ -95,12 +100,11 @@ export default Vue.extend({
         this.username.length <= 16
       ) {
         // Send request to api server
-        (this as any).$http
+        api
           .put(`/redeem?username=${this.username}&code=${this.code}`)
           .then((response: AxiosResponse) => {
             for (let i = 1; i < 9; i++) {
-              // @ts-ignore
-              this.$refs[`code-${i}`][0].value = '';
+              (this.$refs[`code-${i}`] as HTMLInputElement[])[0].value = '';
             }
 
             this.callNotification(response.data.message);
@@ -127,14 +131,18 @@ export default Vue.extend({
       }, 0);
     },
     entered(event: KeyboardEvent, index: number) {
-      const oldRef = this.$refs[`code-${index}`];
-      const newRef = this.$refs[`code-${index + 1}`];
-      if (newRef) {
+      const currentReference = this.$refs[
+        `code-${index}`
+      ] as HTMLInputElement[];
+      const nextReference =
+        index === 8
+          ? (this.$refs['username'] as HTMLInputElement)
+          : (this.$refs[`code-${index + 1}`] as HTMLInputElement[])[0];
+
+      if (nextReference) {
         if (event.key.match(/^[a-z0-9]*$/)) {
-          // @ts-ignore
-          oldRef[0].value = event.key;
-          // @ts-ignore
-          newRef[0].focus();
+          currentReference[0].value = event.key;
+          nextReference.focus();
           event.preventDefault();
         } else if (event.key.length === 1) {
           event.preventDefault();
