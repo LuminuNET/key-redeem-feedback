@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3000/api/v1',
+  baseURL: `http://${process.env.VUE_APP_ROOT_API}:3000/api/v1`,
 });

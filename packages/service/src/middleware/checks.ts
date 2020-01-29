@@ -136,7 +136,9 @@ export const checkTooManyRequests = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.time('redeem/checkTooManyRequests');
   const amount = await incrUser('redeem', req.ip);
+  console.timeEnd('redeem/checkTooManyRequests');
 
   if (parseInt(amount + '') > 9) {
     throw new HTTP400Error('tooManyRequestsAtOnce');
