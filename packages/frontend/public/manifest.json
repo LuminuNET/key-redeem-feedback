@@ -1,11 +1,10 @@
 {
   "short_name": "Beta Key Redeem",
   "name": "Luminu.net Beta Key Redeem",
-  "start_url": "/index.html?source=pwa",
+  "start_url": "/",
   "background_color": "#f1f3f6",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
   "theme_color": "rgb(29, 64, 105)",
   "icons": [
     {
