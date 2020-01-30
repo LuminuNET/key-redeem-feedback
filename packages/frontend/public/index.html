@@ -7,13 +7,48 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <link rel="manifest" href="<%= BASE_URL %>manifest.json" />
     <title>Luminu.net | Beta Key Redeem</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      noscript {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        height: 100vh;
+        width: 90%;
+        margin: 0 auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      noscript .bottom-text {
+        position: absolute;
+        bottom: 10px;
+      }
+
+      noscript marquee {
+        max-width: 80%;
+        width: 500px;
+      }
+    </style>
   </head>
   <body>
     <noscript>
-      <strong
-        >This application doesn't work without javascript enabled! Please enable
-        it to use beta key redeem.</strong
-      >
+      <h2>Luminu.net Beta Key Redeem doesn't work without javascript</h2>
+      <marquee direction="left">
+        <p>Please enable it to continue..</p>
+      </marquee>
+      <br>
+      <p class="bottom-text">
+        For full functionality of this site it is necessary to enable JavaScript. Here are the 
+        <a href=https://www.enable-javascript.com/ >instructions how to enable JavaScript in your web browser</a>.
+      </p>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
