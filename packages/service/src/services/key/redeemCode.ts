@@ -1,4 +1,6 @@
 import con from '../../middleware/mysql';
+import { Redis } from '@luminu/core';
+import { MysqlError } from 'mysql';
 
 export default async (uuid: string, code: string): Promise<any> => {
   const query =
@@ -8,7 +10,11 @@ export default async (uuid: string, code: string): Promise<any> => {
     con.escape(code) +
     ';';
 
-  con.query(query);
+  con.query(query, (err: MysqlError, result: any) => {
+    if (!err) {
+      Redis.getRedis().sadd('betalist', uuid);
+    }
+  });
 
   return { success: true, message: 'codeRedeemedSuccessfully' };
 };
