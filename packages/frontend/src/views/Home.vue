@@ -3,7 +3,7 @@
     <lm-notification
       :fontSize="window().innerWidth <= 560 ? 18 : 24"
       :message="$t('response.' + notification.message)"
-      :active="notification.active"
+      :activity="notification.activity"
     />
     <div class="container">
       <lm-card class="lm-beta">
@@ -19,12 +19,12 @@
             :ref="`code-${index}`"
             class="code-input desktop"
             type="text"
-            name="code"
+            name="beta-luminu-code"
             maxlength="1"
           />
           <input
             type="text"
-            name="code"
+            name="beta-luminu-code"
             ref="code-input-mobile"
             class="user-input mobile"
             maxlength="8"
@@ -70,7 +70,7 @@ export default Vue.extend({
   data: () => ({
     notification: {
       message: 'codeNotSpecified',
-      active: false,
+      activity: 0,
     },
     username: '',
     code: '',
@@ -125,10 +125,7 @@ export default Vue.extend({
     callNotification(message: string) {
       this.notification.message = message;
 
-      this.notification.active = true;
-      setInterval(() => {
-        this.notification.active = false;
-      }, 0);
+      this.notification.activity++;
     },
     entered(event: KeyboardEvent, index: number) {
       const currentReference = this.$refs[
