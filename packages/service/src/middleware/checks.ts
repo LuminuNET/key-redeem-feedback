@@ -35,7 +35,15 @@ export const checkUsername = (
   next: NextFunction
 ) => {
   if (query.username) {
-    next();
+    if (query.username.length > 2 && query.username.length < 17) {
+      if (/^[a-zA-Z0-9_]+$/.test(query.username)) {
+        next();
+      } else {
+        throw new HTTP400Error('usernameNotFound');
+      }
+    } else {
+      throw new HTTP400Error('usernameNotFound');
+    }
   } else {
     throw new HTTP400Error('usernameNotSpecifiedInQuery');
   }
@@ -48,7 +56,11 @@ export const checkCode = (
 ) => {
   if (query.code) {
     if (query.code.length === 8) {
-      next();
+      if (/^[a-z0-9]+$/.test(query.code)) {
+        next();
+      } else {
+        throw new HTTP400Error('codeNotSpecified');
+      }
     } else {
       throw new HTTP400Error('codeLengthNot8');
     }
