@@ -7,7 +7,7 @@ const de = {
   },
   home: {
     youCanRedeemYourBetaKeyHere: 'Du kannst deinen Beta Key hier einlösen.',
-    enterYour8DigitCode: 'Gebe hier deinen 8-stelligen Code ein',
+    enterYour8DigitCode: 'Gebe hier deinen 8-stelligen Key ein',
     yourMinecraftUsername: 'Dein Minecraft Nutzername',
     redeem: 'Einlösen',
     makeSureYoureEnteringYourNameCorrectly:
