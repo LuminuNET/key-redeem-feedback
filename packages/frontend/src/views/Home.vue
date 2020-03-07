@@ -4,6 +4,7 @@
       :fontSize="window().innerWidth <= 560 ? 18 : 24"
       :message="$t('response.' + notification.message)"
       :activity="notification.activity"
+      :timeout="notification.timeout"
     />
     <div class="container">
       <lm-card class="lm-beta">
@@ -71,6 +72,7 @@ export default Vue.extend({
     notification: {
       message: 'codeNotSpecified',
       activity: 0,
+      timeout: 2500,
     },
     username: '',
     code: '',
@@ -123,6 +125,12 @@ export default Vue.extend({
       }
     },
     callNotification(message: string) {
+      if (message === 'codeRedeemedSuccessfully') {
+        this.notification.timeout = 5000;
+      } else {
+        this.notification.timeout = 2500;
+      }
+
       this.notification.message = message;
 
       this.notification.activity++;
