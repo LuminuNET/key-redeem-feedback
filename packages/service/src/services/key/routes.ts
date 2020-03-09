@@ -39,7 +39,7 @@ export default [
     handler: [
       checkApiKey,
       async ({ params }: Request, res: Response) => {
-        const result = await generateKeys(parseInt(params.amount));
+        const result = await generateKeys(+params.amount);
         res.status(200).send(result);
       },
     ],

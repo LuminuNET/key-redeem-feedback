@@ -150,7 +150,7 @@ export const checkTooManyRequests = async (
 ) => {
   const amount = await incrUser('redeem', req.ip);
 
-  if (parseInt(amount + '') > 34) {
+  if (+(amount + '') > 34) {
     throw new HTTP400Error('tooManyRequestsAtOnce');
   }
 
