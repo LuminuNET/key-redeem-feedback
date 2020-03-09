@@ -3,6 +3,7 @@ import {
   handleBodyRequestParsing,
   handleCompression,
   registerRedisClient,
+  storeBetaPlayersInRedis,
 } from './common';
 
 export = [
@@ -10,4 +11,5 @@ export = [
   handleBodyRequestParsing,
   handleCompression,
   registerRedisClient,
+  storeBetaPlayersInRedis,
 ];
