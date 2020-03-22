@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently -n frontend,service \"cd ./packages/frontend && npm run serve\" \"cd ./packages/service && npm run dev\"",
-    "build": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm run build\""
+    "build": "concurrently -n frontend,service \"cd ./packages/frontend && npm run build\" \"cd ./packages/service && npm run build\"",
+    "dev:redis": "bash -c \"redis-server\""
   },
   "repository": {
     "type": "git",

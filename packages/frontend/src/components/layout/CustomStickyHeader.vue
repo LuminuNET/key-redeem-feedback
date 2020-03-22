@@ -20,6 +20,18 @@ export default Vue.extend({
   data: () => ({
     links: [
       {
+        name: 'redeem',
+        to: '/',
+        isExternal: false,
+        hasChildren: false,
+      },
+      {
+        name: 'feedback',
+        to: '/feedback',
+        isExternal: false,
+        hasChildren: false,
+      },
+      {
         name: 'home',
         to: 'https://luminu.net',
         isExternal: true,

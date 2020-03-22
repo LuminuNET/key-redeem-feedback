@@ -4,6 +4,8 @@ const en = {
   navigation: {
     home: 'Home',
     forum: 'Forum',
+    redeem: 'Redeem',
+    feedback: 'Feedback',
   },
   home: {
     youCanRedeemYourBetaKeyHere: 'You can redeem your beta key here.',
@@ -12,6 +14,26 @@ const en = {
     redeem: 'Redeem',
     makeSureYoureEnteringYourNameCorrectly:
       "Make sure you're entering your name correctly.",
+  },
+  feedback: {
+    feedback: 'Feedback',
+    youNeedToEnterYourFeedbackKeyHere:
+      'You need to enter your feedback code here.',
+    ifYouDontKnowHowToGetOneDoTheFollowing:
+      "If you don't know how to get one, do the following:",
+    logIntoMinecraftAndJoinLuminunet:
+      'Open Minecraft and join our Luminu.net Server.',
+    thenTypeFeedbackToGetYourCode:
+      'After that, type /feedback to get your code.',
+    youWillReceiveAnAwardIfYouWillOutTheQuestions:
+      'You will receive an award if you fill out the questions.',
+    keepInMindThatYouCanFillOutTheseQuestionsOnlyOnce:
+      'Keep in mind, that these questions can only be filled out once.',
+    allAnswersAreCompletelyAnonymousTheOnlyDataWeStoreIsIfYouHaveAnsweredAlready:
+      'All answers are completely anonymous, the only data we store is to check, if you have already answered.',
+    required: 'required',
+    pleaseChoose: 'Please Choose',
+    submit: 'Submit',
   },
   response: {
     userAlreadyRedeemedBetaCode:

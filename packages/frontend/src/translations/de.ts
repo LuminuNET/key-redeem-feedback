@@ -4,6 +4,8 @@ const de = {
   navigation: {
     home: 'Home',
     forum: 'Forum',
+    redeem: 'Einlösen',
+    feedback: 'Rückmeldung',
   },
   home: {
     youCanRedeemYourBetaKeyHere: 'Du kannst deinen Beta Key hier einlösen.',
@@ -12,6 +14,9 @@ const de = {
     redeem: 'Einlösen',
     makeSureYoureEnteringYourNameCorrectly:
       'Stelle sicher, dass du deinen Namen richtig eingibst',
+  },
+  feedback: {
+    feedback: 'Rückmeldung',
   },
   response: {
     userAlreadyRedeemedBetaCode:

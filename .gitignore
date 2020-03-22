@@ -3,6 +3,7 @@ node_modules
 dist
 .env
 coverage
+*.rdb
 
 # local env files
 .env.local
