@@ -1,5 +1,6 @@
 <template>
   <div class="feedback view">
+    <lm-notification :activity="activity" :message="$t('response.keyInvalid')" />
     <div class="container">
       <lm-card class="feedback-container">
         <h2 class="title">{{ $t('feedback.feedback') }}</h2>
@@ -30,8 +31,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { LmCard, LmButton } from '@luminu/components';
+import { LmCard, LmButton, LmNotification } from '@luminu/components';
 import LmInput from '@/components/luminu/Input.vue';
+import { mapGetters, mapMutations } from 'vuex';
+import { GET_ERROR, SET_ERROR } from '../store';
 
 export default Vue.extend({
   name: 'feedback-without-key',
@@ -39,6 +42,7 @@ export default Vue.extend({
     key: '',
     inputError: false,
     inputSuccess: false,
+    activity: 0,
   }),
   watch: {
     key() {
@@ -55,10 +59,23 @@ export default Vue.extend({
     LmCard,
     LmButton,
     LmInput,
+    LmNotification,
+  },
+  mounted() {
+    const error = this.$store.state.isError;
+
+    if (error) {
+      this.activity++;
+      this[SET_ERROR]({ isError: false });
+    }
   },
   methods: {
+    ...mapGetters([GET_ERROR]),
+    ...mapMutations([SET_ERROR]),
     submit() {
-      this.$router.push({ path: `/feedback/${this.key}` });
+      if (this.key.length === 6) {
+        this.$router.push({ path: `/feedback/${this.key}` });
+      }
     },
   },
 });

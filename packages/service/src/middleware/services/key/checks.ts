@@ -3,16 +3,10 @@ import {
   HTTP401Error,
   HTTP400Error,
   HTTP404Error,
-  HTTP500Error,
-} from '../utils/httpErrors';
+} from '../../../utils/httpErrors';
+import con from '../../mysql';
 import dotenv from 'dotenv';
-import minecraftApi from './minecraftApi';
-import { AxiosResponse, AxiosError } from 'axios';
-import con from './mysql';
 import { MysqlError } from 'mysql';
-import { Redis } from '@luminu/core';
-
-const { incrUser } = Redis;
 
 dotenv.config();
 
@@ -69,30 +63,6 @@ export const checkCode = (
   }
 };
 
-export const verifyUsername = async (
-  { query }: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { error }: { error: AxiosError } = await new Promise(resolve => {
-    minecraftApi
-      .get(query.username)
-      .then((response: AxiosResponse) => {
-        res.locals.mcApi = response.data;
-        next();
-      })
-      .catch((error: AxiosError) => {
-        resolve({ error });
-      });
-  });
-
-  if (error.response?.status === 404) {
-    throw new HTTP404Error('usernameNotFound');
-  } else {
-    throw new HTTP500Error('serviceUnavailable');
-  }
-};
-
 export const checkExistsRedeemedCode = async (
   { query }: Request,
   res: Response,
@@ -138,20 +108,6 @@ export const checkUserAlreadyRedeemed = async (
 
   if (result.length !== 0) {
     throw new HTTP400Error('userAlreadyRedeemedBetaCode');
-  }
-
-  next();
-};
-
-export const checkTooManyRequests = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const amount = await incrUser('redeem', req.ip);
-
-  if (+(amount + '') > 34) {
-    throw new HTTP400Error('tooManyRequestsAtOnce');
   }
 
   next();

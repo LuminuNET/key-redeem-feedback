@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
+import { checkTooManyRequests } from '../../middleware/services/key/ratelimits';
+import { verifyUsername } from '../../middleware/services/key/verifications';
 import {
-  checkApiKey,
   checkUsername,
   checkCode,
-  verifyUsername,
   checkExistsRedeemedCode,
   checkUserAlreadyRedeemed,
-  checkTooManyRequests,
-} from '../../middleware/checks';
+  checkApiKey,
+} from '../../middleware/services/key/checks';
 import generateKeys from './generateKeys';
 import redeemCode from './redeemCode';
 import { Redis } from '@luminu/core';

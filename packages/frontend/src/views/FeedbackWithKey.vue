@@ -1,5 +1,7 @@
 <template>
   <div class="feedback view">
+    <lm-notification :activity="activity" :message="$t('response.' + message)" />
+
     <div class="container">
       <lm-card class="feedback-container">
         <!-- 
@@ -35,21 +37,35 @@
             v-for="(question, questionIndex) in category.questions"
             :key="questionIndex"
           >
-            <p>{{ question.isRequired ? '*': '' }}{{ $t('question.' + question.name) }}</p>
+            <p>{{ $t('question.' + question.name) }}{{ question.isRequired ? '*': '' }}</p>
             <lm-number-rating
               @value-update="(value) => question.value = value"
+              :isError="(hintsActivated && !question.value && question.isRequired)"
               v-if="question.type === 'number'"
             />
             <lm-custom-rating
               @value-update="(value) => question.value = value"
+              :isError="(hintsActivated && !question.value && question.isRequired)"
               v-else-if="question.type === 'custom'"
               :customs="question.customs"
             />
             <lm-text-area
               @value-update="(value) => question.value = value"
+              :isError="(hintsActivated && !question.value && question.isRequired)"
               v-else-if="question.type === 'text'"
             />
           </div>
+        </div>
+
+        <lm-seperator :mtop="15" :mbottom="10" />
+        <div class="btn-group">
+          <lm-button
+            @click.native="submit()"
+            size="big"
+            type="success"
+            :disabled="isDisabled"
+            :text="$t('feedback.submit')"
+          />
         </div>
       </lm-card>
     </div>
@@ -58,13 +74,28 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { LmCard, LmSeperator, LmButton } from '@luminu/components';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+
+import {
+  LmCard,
+  LmSeperator,
+  LmButton,
+  LmNotification,
+} from '@luminu/components';
 import LmInput from '@/components/luminu/Input.vue';
 import LmNumberRating from '@/components/luminu/NumberRating.vue';
 import LmCustomRating from '@/components/luminu/CustomRating.vue';
 import LmTextArea from '@/components/luminu/TextArea.vue';
 import { addTranslationsFromCategories } from '../translations';
 import { Category } from '../types/category';
+import {
+  LOAD_CATEGORIES,
+  GET_CATEGORIES,
+  SAVE_KEY,
+  SET_ERROR,
+  GET_ERROR,
+} from '../store';
+import { api } from '../plugins/axios';
 
 export default Vue.extend({
   name: 'feedback-with-key',
@@ -76,97 +107,75 @@ export default Vue.extend({
     LmCustomRating,
     LmTextArea,
     LmButton,
+    LmNotification,
   },
-  beforeMount() {
-    addTranslationsFromCategories(this.categories);
+  methods: {
+    ...mapActions([LOAD_CATEGORIES]),
+    ...mapMutations([SAVE_KEY, SET_ERROR]),
+    ...mapGetters([GET_CATEGORIES, GET_ERROR]),
+    checkInvalidAnswers() {
+      let isInvalid = false;
+
+      // using some to quick break out of iteration.
+      (this.categories as Category[]).some(category => {
+        category.questions.some(question => {
+          if (question.isRequired && !question.value) {
+            isInvalid = true;
+          }
+
+          return isInvalid;
+        });
+        return isInvalid;
+      });
+      return isInvalid;
+    },
+    callNotification(message: string) {
+      this.activity++;
+      this.message = message;
+    },
+    async submit() {
+      const isInvalid = this.checkInvalidAnswers();
+
+      if (isInvalid) {
+        this.hintsActivated = true;
+        this.callNotification('requiredQuestionsNotFilledOut');
+        return;
+      } else {
+        this.isDisabled = true;
+        const key = this.$store.state.key;
+        try {
+          const response = await api.post(`/answers?key=${key}`, {
+            answers: this.categories,
+          });
+          const message = response.data.message;
+          this.callNotification(message);
+        } catch {
+          this.isDisabled = false;
+          this.callNotification('serviceUnavailable');
+        }
+      }
+    },
+  },
+  async beforeMount() {
+    this[SAVE_KEY](this.$route.params.key);
+
+    await this[LOAD_CATEGORIES]();
+
+    const error = this.$store.state.isError;
+
+    if (error) {
+      this.$router.push({ path: '/feedback' });
+    } else {
+      this.categories = this[GET_CATEGORIES]();
+      addTranslationsFromCategories(this.categories);
+    }
   },
   data: () => ({
-    categories: [
-      {
-        title: 'general',
-        translations: {
-          en: 'General',
-          de: 'Allgemein',
-        },
-        questions: [
-          {
-            name: 'howSatisfiedAreYouWithOurNetwork',
-            type: 'number',
-            isRequired: true,
-            customs: [],
-            translations: {
-              en: 'How satisfied are you with our network?',
-              de: 'Wie zufrieden bist du mit unserem Netzwerk?',
-            },
-            value: '',
-          },
-          {
-            name: 'whatIsYourFavoriteGamemode',
-            type: 'custom',
-            isRequired: true,
-            customs: ['Bedwars', 'Rush', 'SkyPvP'],
-            translations: {
-              en: 'What is your favorite gamemode?',
-              de: 'Was ist dein liebster Spielmodus?',
-            },
-            value: '',
-          },
-          {
-            name: 'whatWouldYouLikeToChange',
-            type: 'text',
-            isRequired: false,
-            customs: [],
-            translations: {
-              en: 'What is your favorite gamemode?',
-              de: 'Was ist dein liebster Spielmodus?',
-            },
-            value: '',
-          },
-        ],
-      },
-      {
-        title: 'Hello',
-        translations: {
-          en: 'okay',
-          de: 'xd',
-        },
-        questions: [
-          {
-            name: 'howSatisfiedAreYouWithOurNetwork',
-            type: 'number',
-            isRequired: true,
-            customs: [],
-            translations: {
-              en: 'How satisfied are you with our network?',
-              de: 'Wie zufrieden bist du mit unserem Netzwerk?',
-            },
-            value: '',
-          },
-          {
-            name: 'whatIsYourFavoriteGamemode',
-            type: 'custom',
-            isRequired: true,
-            customs: ['Bedwars', 'Rush', 'SkyPvP'],
-            translations: {
-              en: 'What is your favorite gamemode?',
-              de: 'Was ist dein liebster Spielmodus?',
-            },
-            value: '',
-          },
-          {
-            name: 'whatWouldYouLikeToChange',
-            type: 'text',
-            isRequired: false,
-            customs: [],
-            translations: {
-              en: 'What is your favorite gamemode?',
-              de: 'Was ist dein liebster Spielmodus?',
-            },
-            value: '',
-          },
-        ],
-      },
-    ] as Category[],
+    categories: [] as Category[],
+    hintsActivated: false,
+    activity: 0,
+    message: '',
+    isDisabled: false,
   }),
 });
 </script>
@@ -192,6 +201,11 @@ export default Vue.extend({
       .question:not(:last-child) {
         margin-bottom: 15px;
       }
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

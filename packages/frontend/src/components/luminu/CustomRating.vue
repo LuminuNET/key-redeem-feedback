@@ -1,6 +1,6 @@
 <template>
   <div class="custom-rating">
-    <select name @input="updateValue($event.target.value)">
+    <select name @input="updateValue($event.target.value)" :class="{error: isError}">
       <option selected value disabled>{{ $t('feedback.pleaseChoose') }}</option>
       <option v-for="(custom, index) in customs" :key="index" :value="custom">{{ custom }}</option>
     </select>
@@ -18,6 +18,10 @@ export default Vue.extend({
     customs: {
       type: Array,
       required: true,
+    },
+    isError: {
+      type: Boolean,
+      default: false,
     },
   },
 });
@@ -71,8 +75,8 @@ export default Vue.extend({
     font-size: 14px;
     text-transform: uppercase;
 
-    &:focus {
-      outline: none;
+    &.error {
+      box-shadow: 0px 0px 0px 3px rgba($color: $lmError, $alpha: 0.4);
     }
   }
 }

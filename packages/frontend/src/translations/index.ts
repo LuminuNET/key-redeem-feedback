@@ -37,9 +37,12 @@ const addTranslations = (
   translations: Translations
 ) => {
   Object.keys(translations).forEach(locale => {
+    // checks if the parent is undefined, sets it to an object
     if (!messages[locale][parent]) messages[locale][parent] = {};
+    // saves the translations to the messages object
     messages[locale][parent][key] = translations[locale];
 
+    // updates the messages in vue i18n
     i18n.setLocaleMessage(locale, messages[locale]);
   });
 };

@@ -1,15 +1,18 @@
 <template>
-  <div class="number-rating" @click="value = 3">
-    <input
-      type="range"
-      name
-      step="1"
-      max="5"
-      min="1"
-      @input="updateValue($event.target.value); value = $event.target.value"
-      value
-      :data-value="value"
-    />
+  <div class="number-rating">
+    <div class="range-wrapper" @click="updateValue(3); value = 3">
+      <input
+        type="range"
+        name
+        step="1"
+        max="5"
+        min="1"
+        @input="updateValue($event.target.value); value = $event.target.value"
+        :class="{error: isError}"
+        value
+        :data-value="value"
+      />
+    </div>
     <div class="range-hint">
       <p v-for="i in 5" :key="i">{{ i }}</p>
     </div>
@@ -23,6 +26,12 @@ import { valueUpdateEvent } from '../../mixins/valueUpdateEvent';
 export default Vue.extend({
   name: 'LmNumberRating',
   mixins: [valueUpdateEvent],
+  props: {
+    isError: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     value: '',
   }),
@@ -56,6 +65,10 @@ export default Vue.extend({
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba($color: $lmColor3, $alpha: 0.4);
+    }
+
+    &.error {
+      box-shadow: 0px 0px 0px 3px rgba($color: $lmError, $alpha: 0.4);
     }
 
     &::-webkit-slider-runnable-track {

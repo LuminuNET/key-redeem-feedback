@@ -1,6 +1,11 @@
 <template>
   <div class="text-area">
-    <textarea maxlength="1024" name @input="updateValue($event.target.value)"></textarea>
+    <textarea
+      maxlength="1024"
+      name
+      :class="{error: isError}"
+      @input="updateValue($event.target.value)"
+    ></textarea>
   </div>
 </template>
 
@@ -11,6 +16,12 @@ import { valueUpdateEvent } from '../../mixins/valueUpdateEvent';
 export default Vue.extend({
   name: 'LmTextArea',
   mixins: [valueUpdateEvent],
+  props: {
+    isError: {
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 </script>
 
@@ -35,6 +46,10 @@ export default Vue.extend({
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px rgba($color: $lmColor3, $alpha: 0.4);
+    }
+
+    &.error {
+      box-shadow: 0px 0px 0px 3px rgba($color: $lmError, $alpha: 0.4);
     }
   }
 }

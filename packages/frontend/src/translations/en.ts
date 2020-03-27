@@ -48,6 +48,12 @@ const en = {
     codeRedeemedSuccessfully: 'The code was redeemed successfully.',
     tooManyRequestsAtOnce:
       'You have sent too many requests, please wait for 5 minutes.',
+    keyInvalid: 'This key is invalid.',
+    requiredQuestionsNotFilledOut:
+      'Not all required questions were filled out, please check again.',
+    alreadyGivenFeedback: 'You have already given feedback.',
+    successfullyEnteredQuestions:
+      'You have successfully given feedback, thank you! You should have received your reward now.',
   },
   footer,
 };
