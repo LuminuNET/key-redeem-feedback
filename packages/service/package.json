@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tsc-watch -p ./src --lib \"ES2016\",\"DOM\" --onSuccess \"node ./dist/server.js\"",
     "start": "npx pm2 start pm2.yaml",
+    "start:staging": "npx pm2 start pm2.staging.yaml",
     "postinstall": "npm run compile",
     "build": "npm run postinstall",
     "check": "gts check",
