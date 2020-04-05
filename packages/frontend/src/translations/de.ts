@@ -17,6 +17,23 @@ const de = {
   },
   feedback: {
     feedback: 'Rückmeldung',
+    youNeedToEnterYourFeedbackKeyHere:
+      'Du musst deinen Feedback Key hier eingeben.',
+    ifYouDontKnowHowToGetOneDoTheFollowing:
+      'Wenn du nicht weißt, wie du einen bekommen kannst, dann bitte das durchlesen:',
+    logIntoMinecraftAndJoinLuminunet:
+      'Öffne Minecraft und trete dem Luminu.net Server bei.',
+    thenTypeFeedbackToGetYourCode:
+      'Danach musst du /feedback eingeben um deinen Key zu erhalten',
+    youWillReceiveAnAwardIfYouWillOutTheQuestions:
+      'Wenn du die Fragen ausfüllst erhälst du deine Belohnung',
+    keepInMindThatYouCanFillOutTheseQuestionsOnlyOnce:
+      'Vergess nicht, dass du diese Fragen nur einmalig ausfüllen kannst.',
+    allAnswersAreCompletelyAnonymousTheOnlyDataWeStoreIsIfYouHaveAnsweredAlready:
+      'Alle Antworten sind vollkommen anonym, die einzigen Daten die wir personenbezogen speichern sind; ob du bereits geantwortet hast oder nicht.',
+    required: 'verpflichtend',
+    pleaseChoose: 'Wähle aus',
+    submit: 'Abschicken',
   },
   response: {
     userAlreadyRedeemedBetaCode:
@@ -31,6 +48,12 @@ const de = {
     codeRedeemedSuccessfully: 'Der Key wurde erfolgreich eingelöst.',
     tooManyRequestsAtOnce:
       'Du hast zu viele Anfragen auf einmal gesendet, bitte warte einen Moment.',
+    keyInvalid: 'Der Key ist ungültig',
+    requiredQuestionsNotFilledOut:
+      'Nicht alle verpflichtenden Fragen wurden ausgefüllt, bitte überprüfe sie erneut.',
+    alreadyGivenFeedback: 'Du hast bereits Feedback gegeben.',
+    successfullyEnteredQuestions:
+      'Du hast erfolgreich Feedback gegeben! Vielen Dank! Du solltest deine Belohnung jetzt erhalten haben.',
   },
   footer,
 };
