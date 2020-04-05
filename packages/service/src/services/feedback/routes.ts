@@ -13,6 +13,7 @@ import {
 import {
   expireToken,
   saveAnswers,
+  giveReward,
 } from '../../middleware/services/feedback/functions';
 
 export default [
@@ -37,6 +38,7 @@ export default [
       verifyAnswers,
       expireToken,
       saveAnswers,
+      giveReward,
       async (req: Request, res: Response) => {
         res.status(200).json({ message: 'successfullyEnteredQuestions' });
       },
